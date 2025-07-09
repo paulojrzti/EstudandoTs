@@ -33,6 +33,10 @@ function App() {
     });
     setToDo(updateToDo);
   };
+  const removeToDo = (id: string) => {
+    const updateToDo = toDo.filter((item) => item.id !== id);
+    setToDo(updateToDo);
+  };
 
   return (
     <>
@@ -56,7 +60,8 @@ function App() {
                   checked={toDoItem.concluido}
                   onChange={() => taskCompleted(toDoItem.id)}
                 />
-                {toDoItem.texto}
+                <span style={{ textDecoration: toDoItem.concluido ? 'line-through' : 'none' }}>{toDoItem.texto}</span>
+                <button onClick={() => removeToDo(toDoItem.id)}>Remover</button>
               </li>
             ))}
           </ul>
