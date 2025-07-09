@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 interface toDoitem {
@@ -10,7 +10,21 @@ interface toDoitem {
 function App() {
   const [toDo, setToDo] = useState<toDoitem[]>([]);
   const [newToDo, setNewToDo] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (loading) {
+      localStorage.setItem("toDoList", JSON.stringify(toDo));
+    }
+  }, [toDo, loading]);
+  useEffect(() => {
+    const storedToDo = localStorage.getItem("toDoList");
+    if (storedToDo) {
+      setToDo(JSON.parse(storedToDo));
+    }
+    setLoading(true);
+  }, []);
+  
   const adicionarTarefa = () => {
     if (newToDo !== "") {
       const newId = crypto.randomUUID();
