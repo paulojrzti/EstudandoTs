@@ -38,11 +38,15 @@ function App() {
     setToDo(updateToDo);
   };
 
+  const numberOfTasks = (): toDoitem[] => {
+    return toDo.filter((item) => item.concluido);
+  };
+
   return (
     <>
       <div className="app">
         <div className="container">
-          <h1>Lista de Tarefas</h1>
+          <h1>Lista de Tarefas - {numberOfTasks().length}/{toDo.length}</h1>
           <div className="input-container">
             <input
               type="text"
