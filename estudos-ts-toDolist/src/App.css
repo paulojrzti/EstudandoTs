@@ -1,23 +1,164 @@
-.app{
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.container{
-  width: 40%;
-  padding: 50px 20px;
-  background-color: #5f5e5e;
-  border-radius: 8px;
-  height: auto;
+
+html, body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+}
+
+/* Tema Light */
+.app.light {
+  background-color: #f0f2f5;
+  color: #1a1a1a;
+}
+
+/* Tema Dark */
+.app.dark {
+  background-color: #121212;
+  color: #f9f9f9;
+}
+
+/* App ocupa tela toda e centraliza conteúdo */
+.app {
+  min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* Container central */
+.container {
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: inherit;
+  color: inherit;
+  display: flex;
   flex-direction: column;
-  color: white;
+  gap: 1.5rem;
+  transition: all 0.3s ease-in-out;
 }
-.input-container{
+
+/* Box shadow somente no light mode */
+.app.light .container {
+  background-color: #ffffff;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+h1 {
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+/* Área de input + botão */
+.input-container {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.input-container input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: inherit;
+  color: inherit;
+}
+
+.input-container button {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.input-container button:hover {
+  background-color: #4338ca;
+}
+
+/* Lista de tarefas */
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+li {
+  background-color: rgba(100, 100, 100, 0.05);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+li input[type="checkbox"] {
+  cursor: pointer;
+}
+
+li span {
+  flex: 1;
+  word-break: break-word;
+}
+
+/* Botão de remover tarefa */
+li button {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.9rem;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+li button:hover {
+  background-color: #dc2626;
+}
+
+/* Botão de alternar tema */
+.theme-toggle {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  align-self: center;
+}
+
+.theme-toggle:hover {
+  background-color: #059669;
+}
+
+/* Responsividade: layout mais horizontal em telas maiores */
+@media (min-width: 640px) {
+  .input-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .input-container input {
+    flex: 1;
+  }
+
+  .input-container button {
+    width: auto;
+  }
 }

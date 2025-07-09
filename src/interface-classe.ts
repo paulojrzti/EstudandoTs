@@ -1,3 +1,4 @@
+//estudos
 interface Pessoa { 
     nome: string,
     idade: number,

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTheme } from "./themeContext";
 import "./App.css";
 
 interface toDoitem {
@@ -8,6 +9,7 @@ interface toDoitem {
 }
 
 function App() {
+  const { theme, toggleTheme } = useTheme();
   const [toDo, setToDo] = useState<toDoitem[]>([]);
   const [newToDo, setNewToDo] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -52,15 +54,17 @@ function App() {
     setToDo(updateToDo);
   };
 
-  const numberOfTasks = (): toDoitem[] => {
-    return toDo.filter((item) => item.concluido);
+  const numberOfTasks = (): number => {
+    return toDo.filter((item) => item.concluido).length;
   };
 
   return (
     <>
-      <div className="app">
-        <div className="container">
-          <h1>Lista de Tarefas - {numberOfTasks().length}/{toDo.length}</h1>
+      <div className={`app ${theme}`}>
+        <div className={`container ${theme}`}>
+          <h1>
+            Lista de Tarefas - {numberOfTasks()}/{toDo.length}
+          </h1>
           <div className="input-container">
             <input
               type="text"
@@ -78,11 +82,22 @@ function App() {
                   checked={toDoItem.concluido}
                   onChange={() => taskCompleted(toDoItem.id)}
                 />
-                <span style={{ textDecoration: toDoItem.concluido ? 'line-through' : 'none' }}>{toDoItem.texto}</span>
+                <span
+                  style={{
+                    textDecoration: toDoItem.concluido
+                      ? "line-through"
+                      : "none",
+                  }}
+                >
+                  {toDoItem.texto}
+                </span>
                 <button onClick={() => removeToDo(toDoItem.id)}>Remover</button>
               </li>
             ))}
           </ul>
+        <button className="theme-toggle" onClick={toggleTheme}>
+          alterar tema ({theme === "light" ? "dark" : "light"})
+        </button>
         </div>
       </div>
     </>
